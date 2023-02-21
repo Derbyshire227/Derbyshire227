@@ -1,0 +1,480 @@
+<?php
+
+if( 5 < 3 xor 5 > 10) {
+    echo "Only one of the above expresions was true.";
+}
+
+//outputs a message if only just one of the expressions was true.
+
+$message = "This message will be encoded.";
+
+$encoded = str_rot13($message);
+
+echo "<br>";
+
+$return = str_rot13($encoded);
+
+echo $return;
+
+/* Multiple line comment 
+
+
+Works aslong as the text is between the comments 
+
+
+*/
+
+//single line comment 
+
+//VARIABLES SCOPE --------------------------------------------------------------------------------------------------------------
+
+$x = 10; // global scope
+
+function firstTest() {
+    // creation of a function, this function cannot use any varable declared outside.
+    // using $x will not work, it was decalred outside this function 
+    echo "<p> The variable x is: $x </p>"; // this will throw a error
+}
+echo "<p>The variable x is: $x</P>"; // this will work as variable being used has a "Global Scope"
+
+
+
+$y = 5;  
+$a = 10;
+
+function secondTest() {
+    global $a, $y; // "global" allows for variables with a global scope to be accessed and used within a function
+    $a = $y + $a;
+
+}
+
+secondTest(); // calls on function 
+echo $a; // prints 15
+
+function thirdTest () {
+    $GLOBALS['a'] = $GLOBALS['y'] + $GLOBALS['a'];
+    // PHP stores all global variables into a array known as $GLOBALS[INDEX] 
+}
+
+thirdTest();
+echo $a; // prints 15
+
+
+function fourthTest() {
+    static $b = 0; // static allows for the information to be brought over the next time the function is used.
+    echo $b;
+    $b++;
+}
+
+fourthTest();//0
+fourthTest();//1
+fourthTest();//2
+
+//END OF GLOBAL SCOPE---------------------------------------------------------------------------------------------------------------
+
+// Data Types ------------------------------------------------------------------------------------------------------
+
+$cars = array("BMW", "Volvo", "Audi");
+var_dump($cars); // var_dump returns data type and value, $x = 5985, var_dump($x) = int(5985)
+/*  array(3) {
+  [0]=>
+  string(3) "BMW"
+  [1]=>
+  string(5) "Volvo"
+  [2]=>
+  string(4) "Audi"
+} */
+
+class car {
+    public $colour;
+    public $model;
+    public function __construct($colour, $model){
+
+        $this->colour = $colour;
+        $this->model = $model;
+
+    }
+    public function carMessage() {
+        return "My car is a " . $this->colour . " ". $this->model . "!";
+    }    
+}
+
+$myCar = new car("White", "Tesla");
+echo $myCar -> carMessage();// prints "My Car is a White Tesla!"
+
+echo "<br>"; 
+
+$myCar1 = new car("Black", "Rangerover");
+echo $myCar1 -> carMessage(); // prints "My car is a Black Rangerover!"
+
+echo "<br>";
+// END OF DATA TYPES ---------------------------------------------------------------------------------
+
+// String Functions ----------------------------------------------------------------------------------
+
+
+echo strlen("Hello World!"); // prints 12, strlen will return the length of a string (int)
+
+echo str_word_count("Hello World!"); // prints 2, counts number of words in a string (int)
+
+echo strrev("Hello World!"); // Reverses a string (string)
+
+echo strpos("Hello World!", "World"); // Searches for a specific text within a string.  Returns the character position of the first match (int), if no match then returns with "FALSE" (string)
+
+echo str_Replace("World", "Human", "Hello World!"); //replaces world to human (string)
+
+//END OF STRING FUNCTIONS ---------------------------------------------------------------------------
+
+// PHP Math -----------------------------------------------------------------------------------------
+
+echo(min(0, 150, 100, 4, -4, 1000)); //returns lowest number e.g. -4 (int)
+echo(max(0, 150, 100, 4, -4, 1000)); //returns higest number e.g. 1000 (int)
+
+echo(abs(-1543)); // returns postive value of a int (int)
+
+echo(sqrt(64)); // returns square root of a number (int) 
+
+echo(rand()); // prints a random number (int) Also works between two number choc(rand(5, 100));
+
+// END OF PHP MATHS ----------------------------------------------------------------------------------
+
+// PHP Constants -------------------------------------------------------------------------------------
+
+//Constants are global, allowing for them to be used across the entire script. 
+
+define("cars", [
+    "BMW", //[0]
+    "Tesla", //[1]
+    "Kia", //[2]
+    "Toyota" //[3]
+]);
+echo cars[0]; // outputs BMW (string)
+
+
+define("STATEMENT", "Welcome Youngster!", true); // true allows for the constant "STATEMENT" to be case-insenstive
+
+function myTest() {
+    echo STATEMENT; // constant can be used despite it being decarled outside the function.
+}
+
+echo myTest(); // works!
+
+// END OF PHP CONSTANTS --------------------------------------------------------------------------------
+
+//PHP Operators --------------------------------------------------------------------------------------
+
+//PHP arithmetic Operators
+
+$x + $y; // Sum of $x and $y
+$x - $y; // difference of $x and $y
+$x * $y; // product of $x and $y
+$x / $y; // divide 
+$x % $y; // remainder of $x divided by $y
+ //------------------------------------------------------------------------------------------------------
+
+
+ //PHP Comparison Operators -----------------------------------------------------------------------------
+
+$x == $y; // will return 'true' or 'false'. Compares to see if both are equal (Boolean)
+$x === $y; // (boolean) Compares to see if they are queaul and same type
+$x <> $y;// not equal (boolean)
+//--------------------------------------------------------------------------------------------------------
+
+//PHP Conditional Statements------------------------------------------------------------------------------
+
+
+/* 
+
+if (condition) {
+    code that you want to be executed if condition is true; 
+} else {
+    code that you want to be executed if condition is false 
+}
+
+if(condition) {
+    code will be executed if codition is true;
+} elseif(condition) {
+    code will be executed if first condition is false and this condition is true;
+} else {
+    code will be executed if all conditions are false;
+}
+
+switch (x) {         
+    case try1:
+        code to be executed if x=try1;
+        break;
+    case try2:
+        code to be executed if x=try2;
+        break;
+    case try3:
+        code to be executed if x=try3;
+        break;
+    default:
+    coded to be executed if x is different from all "trys";
+}
+
+
+
+
+while (condition is true) {
+    code to be executed;
+}
+*/
+
+$x = 1; //start value 
+
+while($x <= 5) { // if $x is less than or equal to 5, continues the loop
+    echo "The number is: $x <br>";
+    $x++; // increase the loop counter value by 1 for each iteration 
+}
+
+/* Will output:
+The number is: 1
+The number is: 2
+The number is: 3
+The number is: 4
+The number is: 5
+*/
+
+/* do {
+    coded to be executed;
+} while( condition is true;)
+*/
+
+$x = 1;
+
+do{
+    echo "The number is: $x <br>";
+    $x++;
+} while ($x <= 5);
+
+/* 
+FOR
+WHILE
+DO..WHILE
+FOREACH
+ */ 
+
+ /* do {
+    code to be executed;
+ } while (conditon is true);
+ */
+
+
+ $x = 1;
+
+ do{
+    echo "The number is: $x <br>";
+    $x++;
+ } while ($x <= 5);
+
+
+ /* 
+ for (init counter; test counter; increment counter) {
+    code to be executed for each oteration;
+ }
+*/
+
+for ($x = 0; $x <= 10; $x++) { // if $x is smaller (<) or equal (=) to 10, +1
+    echo "The number is; $x <br>";
+}
+
+/*foreach ($array as $vaule) {
+    code to be executed;
+}
+*/
+
+$colours = array("red", "green", "blue", "yellow");      /* outputs:
+                                                            red
+                                                            green
+                                                            blue
+                                                            yellow */
+foreach( $colours as $value) {
+    echo "$value <br>";
+}
+ 
+ $age = array("Alex"=>"23", "Joe"=>"65", "Cameron"=>"32");
+
+ foreach($age as $x => $val) {
+    echo "$x = $val<br>";
+ } /* 
+ outputs:
+ Alex=23
+ Joe=65
+ Cameron=32 */
+
+ // break - used to "jump" out of a loop
+
+ for ($x = 0; $x <10; $x++) {
+    if ($x == 4){
+        break;
+    }
+    echo "The number is: $x <br>"; // outputs up to 3. // While ($x < 10) {if ($x == 4 || )}
+ }
+
+ for ($x = 0; $x < 10; $x++) 
+    if ($x == 4){
+        continue;
+    }
+    echo "The number is: $x <br>"; //outputs to 9. 
+
+
+
+while($x <10) {
+    if($x == 4) {
+        $x++;
+        continue;
+    }
+    echo "The number is: $x <br>";
+    $x++;
+}
+//PHP Functions. 
+
+function familyName($fname, $year, $gender) {
+    echo "$fname Jammy - Born $year - Gender: $gender <br>";
+
+}
+
+familyName("Alex", "1999", "Male"); 
+familyName("Jim", "1989", "Male" );
+familyName("John", "1962", "Male");
+familyName("Charite", "1999", "Female");
+/* Alex Jammy - Born 1999 - Gender: Male
+Jim Jammy - Born 1989 - Gender: Male
+John Jammy - Born 1962 - Gender: Male
+Charite Jammy - Born 1999 - Gender: Female */
+
+
+// PHP array's ---------------------------------------------------------------------------------
+
+$people = array("Alex", "Jim", "Jamie", "Dracula"); 
+
+echo count($people); // outputs 4. 
+
+$arrlength = count($people);
+
+for($x = 0; $x < $arrlength; $x++) {
+    echo $people[$x];
+    echo "<br>"; //outputs all in the array as a list.
+}
+
+$food = array (
+    array("Apple", "24", "2"), //  [0]array("[0]", "[1]", "[2]"),
+    array("Grape", "132", "34"),//  [1]array("[0]", "[1]", "[2]"),
+    array("Banana", "50", "45")//  [2]array("[0]", "[1]", "[2]"),
+);
+
+echo $food[0][0].": In Stock: ".$food[0][1].", Sold: ".$food[0][2].".<br>";
+echo $food[1][0].": In Stock: ".$food[1][1].", Sold: ".$food[1][2].".<br>";
+echo $food[2][0].": In Stock: ".$food[2][1].", Sold: ".$food[2][2].".<br>";
+
+/* Apple: In Stock: 24, Sold: 2.
+Grape: In Stock: 132, Sold: 34.
+Banana: In Stock: 50, Sold: 45. */
+ 
+for ($row = 0; $row < 4; $row++) {
+    echo "<p><b>Row Number</b></p>";
+    echo "<ul>";
+    for ($col = 0; $col < 3; $col++) {
+        echo"<li>".$food[$row][$col]."</li>";
+    }
+    echo "</ul>";
+}
+
+/*   
+sort() - sort arrays in ascending order
+rsort() - sort arrays in descending order
+asort() - sort associative arrays in ascending order, according to the value
+ksort() - sort associative arrays in descending order, according to the value
+krsort() - sort associative arrays in descending order, accordingto the key
+*/
+
+
+//PHP $_REQUEST, used to collect data after submitting an HTML form. 
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_REQUEST['fname'];
+    if (empty($name)) {
+        echo "Please enter a name!";
+    } else {
+        echo $name;
+    }
+}
+
+/* <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+Please Enter your name: <input type= "text" name= "fname">
+<input type= "submit" >
+</form> */ // has to be placed outside php scope 
+
+$input = (int)readline("Please choose what you would like to open (1-3):");
+
+switch ($input) {
+    case "1":
+        echo "You have choosen 1";
+        break;
+    case "2":
+        echo "You have choosen 2";
+        break;
+    case "3":
+        echo "You have choosen 3";
+        break;
+    default:
+    echo "Please choose a number between 1-3";
+
+
+$name = $email = $gender = $comment = $website = "";
+
+
+if ( $_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = test_input($_POST["name"]);
+    $email = test_input($_POST["email"]);
+    $website = test_input($_POST["website"]);
+    $comment = test_input($_POST["comment"]);
+    $gender = test_input($_POST["gender"]);
+
+}
+
+function test_input($data) {
+
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
+}
+
+?>
+
+<h2> Enter Title here... </h2> 
+<form method = "post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+Name: <input type="text" name="name">
+  <br><br>
+  E-mail: <input type="text" name="email">
+  <br><br>
+  Website: <input type="text" name="website">
+  <br><br>
+  Comment: <textarea name="comment" rows="5" cols="40"></textarea>
+  <br><br>
+  Gender:
+  <input type="radio" name="gender" value="female">Female
+  <input type="radio" name="gender" value="male">Male
+  <input type="radio" name="gender" value="other">Other
+  <br><br>
+  <input type="submit" name="submit" value="Submit">  
+</form>
+
+<?php // all php has to be written between php scope 
+echo "<h2> Enter Title here... </h2>";
+echo $name;
+echo "<br>";
+echo $email;
+echo "<br>";
+echo $website;
+echo "<br>";
+echo $comment;
+echo "<br>";
+echo $gender;
+?>
+
