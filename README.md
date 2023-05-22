@@ -1,6 +1,6 @@
 - 👋 Hi, I’m @Derbyshire227
 - 👀 I’m interested in all things software and hardware. I really enjoy programming only been learning for a couple of years now
-- 🌱 I’m currently learning PHP. 
+- 🌱 I’m currently learning PHP (anything related to web dev) 
 - 💞️ Love to read and try to understand code. Always looking for help :D
 - 📫 I have a instagram for all things programming. @programmingacc1999
 
